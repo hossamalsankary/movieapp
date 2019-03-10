@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title> movie app </title>
+
+<style>
+
+  *{
+    box-sizing: border-box;
+  }
+
+  body,html{
+    background-color:black;
+    padding:0;
+    margin:0;
+    width:100%;
+    height:100%;
+  }
+
+  form{
+
+    display: flex;
+    flex: 1;
+    padding: 15px 0;
+    border: 2px solid #232323;
+    padding-right: 0;
+    padding-left: 18px;
+  }
+  #search{
+
+    padding: 13px;
+    flex: 0.9;
+    border: 1px solid #FFF;
+    border-bottom: 2px solid #4A4B4A;
+    box-shadow: 1px 6px 14px -6px #76C90F;
+    margin-right: 14px;
+    border-radius: 15px;
+  }
+  #submit{
+    
+    flex: 0.1;
+    padding: 10px;
+    border: 1px solid #0E1111;
+    background-color: #4DCE00;
+    border-radius: 15px;
+    font-size: 19px;
+  }
+  .movie_container{
+
+    width: 96%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 47px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .movie_body{
+
+    display: ;
+    height: 573px;
+    padding: 9px;
+    margin: 3px;
+    background-image: linear-gradient(to left bottom, #3f3b3d, #413a3f, #413943, #3f3948, #3a394d, #343a4e, #2d3c4f, #263d4e, #243d49, #263d43, #2a3c3e, #2e3b3a);
+    display: flex;
+    flex-direction: column;
+    max-width: 419px;
+    padding-top: 12px;
+    flex: 0.33333;
+    align-items: center;
+  }
+  .movieinfo{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  }
+  .Title,
+  .Year{
+    font-size: 21px;
+    font-weight: bold;
+    text-shadow: 1px 5px 25px #0e0f0e;
+
+    word-wrap: unset;
+    text-align: center;
+  }
+
+  .Year{
+
+    margin-top: 5px;
+    margin-bottom: 6px;
+  }
+  img{
+    height:420px;
+    box-shadow: 1px 0px 3px 1px #000;
+    max-width: 373px;
+    border-radius:10px;
+  }
+  button{
+    margin-top: 3%;
+  padding: 14px;
+  border: 1px solid #0E1111;
+  background-color: #4DCE00;
+  border-radius: 15px;
+  font-size: 16px;
+  overflow: hidden;
+  font-weight: bold;
+  cursor: pointer;
+    min-width: 100%;
+  }
+
+</style>
+</head>
+<body>
+
+  <form action="/home" method="post">
+    search:<br>
+    <input type="text" name="search" id = "search">
+    <br>
+
+    <input type="submit" value="Submit" id="submit">
+  </form> 
+
+<div class = "movie_container">
+
+  <%if(data == "Erro"){%> 
+
+  <h1 style="color:red;"> Some Thing Went Wrong</h1>
+
+  <%}%>
+
+
+  <%if(typeof data === "object"){%> 
+    <% data.forEach(function(movie){%> 
+
+        <%
+        //============= define the movie information 
+          let title = movie.Title, poster = movie.Poster, link = movie.link,  Year =movie.Year;
+
+
+            if(movie.Poster === "N/A" ){ poster = 'https://semantic-ui.com/images/wireframe/image.png'; } //cheack if poster not found
+              
+            if(title.lenght !== 25){ title = title.slice(0, 25); }// cheack lenght of Title 
+        %> 
+         
+       
+          <div class="movie_body">    
+            <div class="movieinfo">
+
+              <span class="Title"><%= title%></span>
+              <span class="Year"> <%= Year%> </span>
+
+            </div>
+
+               <img src ='<%= poster %>'>
+
+              <div class="link container">
+
+                <a href="<%=link%>"  target="_blank" > <button>  Download  <strong><%= title%> </strong> Now </button></a>
+
+              </div>
+          </div>
+        
+        <%})%> 
+  <%}%>
+
+</div>
+</body>
+</html>
+
