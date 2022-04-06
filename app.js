@@ -5,7 +5,7 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: true })) //used body-parser
 
 app.set('view engine', 'ejs') // to write dir og app without extention
-
+ //old man
 //root
 app.get("/",function(req ,res){
     
